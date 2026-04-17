@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { getNextValue } from "@/shared/toggle";
 import type { StoredPair } from "@/shared/types";
 import { PairForm } from "./components/PairForm";
 import { PairList } from "./components/PairList";
@@ -46,10 +47,7 @@ export function App() {
   };
 
   const handleToggle = async (pair: StoredPair) => {
-    const current = currentValues[pair.key];
-    const index = pair.values.indexOf(current ?? "");
-    const nextIndex = index === -1 || index === pair.values.length - 1 ? 0 : index + 1;
-    const newValue = pair.values[nextIndex];
+    const newValue = getNextValue(pair, currentValues[pair.key] ?? null);
 
     setCurrentValues((prev) => ({ ...prev, [pair.key]: newValue }));
 

@@ -44,6 +44,7 @@ export function PairCard({ pair, index, currentValue, onToggle, onEdit, onDelete
                     size="icon"
                     className="h-7 w-7 shrink-0"
                     onClick={onToggle}
+                    aria-label="Toggle to next value"
                   >
                     <Play className="h-3.5 w-3.5" />
                   </Button>

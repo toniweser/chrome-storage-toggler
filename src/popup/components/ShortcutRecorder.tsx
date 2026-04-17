@@ -1,5 +1,6 @@
 import { Keyboard, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { formatShortcut } from "@/shared/shortcut";
 import type { StoredPair } from "@/shared/types";
 import { Button } from "./ui/button";
 
@@ -8,26 +9,6 @@ interface ShortcutRecorderProps {
   onChange: (shortcut: string | null) => void;
   allPairs: StoredPair[];
   currentPairId: string | null;
-}
-
-function formatShortcut(e: KeyboardEvent): string | null {
-  if (e.key === "Escape") return null;
-
-  const modifiers: string[] = [];
-  if (e.ctrlKey) modifiers.push("Ctrl");
-  if (e.altKey) modifiers.push("Alt");
-  if (e.shiftKey) modifiers.push("Shift");
-  if (e.metaKey) modifiers.push("Meta");
-
-  // Require at least one modifier
-  if (modifiers.length === 0) return null;
-
-  // Ignore if only modifier keys are pressed
-  const modifierKeys = ["Control", "Alt", "Shift", "Meta", "CapsLock", "NumLock"];
-  if (modifierKeys.includes(e.key)) return null;
-
-  const key = e.key.length === 1 ? e.key.toUpperCase() : e.key;
-  return [...modifiers, key].join("+");
 }
 
 export function ShortcutRecorder({

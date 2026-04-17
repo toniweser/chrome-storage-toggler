@@ -39,7 +39,7 @@ async function getConfig(): Promise<{ pairs: StoredPair[] }> {
   return { pairs: (result.pairs as StoredPair[] | undefined) ?? [] };
 }
 
-function isScriptableUrl(url: string | undefined): boolean {
+export function isScriptableUrl(url: string | undefined): boolean {
   if (!url) return false;
   return (
     !url.startsWith("chrome://") &&

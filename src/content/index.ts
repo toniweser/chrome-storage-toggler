@@ -1,40 +1,19 @@
+import { matchesShortcut } from "@/shared/shortcut";
+import { getNextValue } from "@/shared/toggle";
 import type { StoredPair } from "@/shared/types";
 
 let pairs: StoredPair[] = [];
-
-function getNextValue(pair: StoredPair): string {
-  const current = localStorage.getItem(pair.key);
-  const index = pair.values.indexOf(current ?? "");
-  if (index === -1 || index === pair.values.length - 1) {
-    return pair.values[0];
-  }
-  return pair.values[index + 1];
-}
 
 function handleKeyDown(e: KeyboardEvent) {
   for (const pair of pairs) {
     if (!pair.shortcut) continue;
 
-    const parts = pair.shortcut.split("+");
-    const key = parts[parts.length - 1];
-    const modifiers = parts.slice(0, -1);
-
-    const needsCtrl = modifiers.includes("Ctrl");
-    const needsShift = modifiers.includes("Shift");
-    const needsAlt = modifiers.includes("Alt");
-    const needsMeta = modifiers.includes("Meta");
-
-    if (
-      e.key.toUpperCase() === key.toUpperCase() &&
-      e.ctrlKey === needsCtrl &&
-      e.shiftKey === needsShift &&
-      e.altKey === needsAlt &&
-      e.metaKey === needsMeta
-    ) {
+    if (matchesShortcut(pair.shortcut, e)) {
       e.preventDefault();
       e.stopPropagation();
 
-      const nextValue = getNextValue(pair);
+      const current = localStorage.getItem(pair.key);
+      const nextValue = getNextValue(pair, current);
       localStorage.setItem(pair.key, nextValue);
 
       if (pair.reloadAfterToggle) {
