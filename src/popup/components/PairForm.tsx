@@ -1,12 +1,12 @@
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import type { StoredPair } from "@/shared/types";
+import { ShortcutRecorder } from "./ShortcutRecorder";
+import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { Switch } from "./ui/switch";
 import { ValueList } from "./ValueList";
-import { ShortcutRecorder } from "./ShortcutRecorder";
-import { Plus } from "lucide-react";
 
 interface PairFormProps {
   pair?: StoredPair;
@@ -18,17 +18,11 @@ interface PairFormProps {
 export function PairForm({ pair, allPairs, onSave, onCancel }: PairFormProps) {
   const [key, setKey] = useState(pair?.key ?? "");
   const [values, setValues] = useState<string[]>(pair?.values ?? ["", ""]);
-  const [reloadAfterToggle, setReloadAfterToggle] = useState(
-    pair?.reloadAfterToggle ?? true
-  );
-  const [shortcut, setShortcut] = useState<string | null>(
-    pair?.shortcut ?? null
-  );
+  const [reloadAfterToggle, setReloadAfterToggle] = useState(pair?.reloadAfterToggle ?? true);
+  const [shortcut, setShortcut] = useState<string | null>(pair?.shortcut ?? null);
   const [newValue, setNewValue] = useState("");
 
-  const canSave =
-    key.trim() !== "" &&
-    values.filter((v) => v.trim() !== "").length >= 2;
+  const canSave = key.trim() !== "" && values.filter((v) => v.trim() !== "").length >= 2;
 
   const handleAddValue = () => {
     if (newValue.trim()) {
@@ -64,15 +58,9 @@ export function PairForm({ pair, allPairs, onSave, onCancel }: PairFormProps) {
 
       <div className="flex flex-col gap-2.5">
         <label className="text-sm font-medium">
-          Values{" "}
-          <span className="text-muted-foreground font-normal">
-            (drag to reorder)
-          </span>
+          Values <span className="text-muted-foreground font-normal">(drag to reorder)</span>
         </label>
-        <ValueList
-          values={values}
-          onChange={setValues}
-        />
+        <ValueList values={values} onChange={setValues} />
         <div className="flex items-center gap-1.5">
           <div className="w-3.5 shrink-0" />
           <Input
@@ -101,10 +89,7 @@ export function PairForm({ pair, allPairs, onSave, onCancel }: PairFormProps) {
 
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium">Reload after toggle</label>
-        <Switch
-          checked={reloadAfterToggle}
-          onCheckedChange={setReloadAfterToggle}
-        />
+        <Switch checked={reloadAfterToggle} onCheckedChange={setReloadAfterToggle} />
       </div>
 
       <div className="flex flex-col gap-2.5">

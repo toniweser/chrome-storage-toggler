@@ -1,7 +1,7 @@
+import { Keyboard, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { StoredPair } from "@/shared/types";
 import { Button } from "./ui/button";
-import { Keyboard, X } from "lucide-react";
 
 interface ShortcutRecorderProps {
   value: string | null;
@@ -23,14 +23,7 @@ function formatShortcut(e: KeyboardEvent): string | null {
   if (modifiers.length === 0) return null;
 
   // Ignore if only modifier keys are pressed
-  const modifierKeys = [
-    "Control",
-    "Alt",
-    "Shift",
-    "Meta",
-    "CapsLock",
-    "NumLock",
-  ];
+  const modifierKeys = ["Control", "Alt", "Shift", "Meta", "CapsLock", "NumLock"];
   if (modifierKeys.includes(e.key)) return null;
 
   const key = e.key.length === 1 ? e.key.toUpperCase() : e.key;
@@ -50,11 +43,9 @@ export function ShortcutRecorder({
 
   const checkConflict = useCallback(
     (shortcut: string): StoredPair | undefined => {
-      return allPairs.find(
-        (p) => p.id !== currentPairId && p.shortcut === shortcut
-      );
+      return allPairs.find((p) => p.id !== currentPairId && p.shortcut === shortcut);
     },
-    [allPairs, currentPairId]
+    [allPairs, currentPairId],
   );
 
   useEffect(() => {
@@ -118,16 +109,10 @@ export function ShortcutRecorder({
           <Keyboard className="h-4 w-4 text-muted-foreground shrink-0" />
           <span
             className={
-              recording
-                ? "text-primary"
-                : value
-                  ? "text-foreground"
-                  : "text-muted-foreground"
+              recording ? "text-primary" : value ? "text-foreground" : "text-muted-foreground"
             }
           >
-            {recording
-              ? "Press a key combination..."
-              : value ?? "Click to record..."}
+            {recording ? "Press a key combination..." : (value ?? "Click to record...")}
           </span>
         </div>
 
@@ -147,8 +132,7 @@ export function ShortcutRecorder({
       {conflict && (
         <div className="text-xs space-y-1">
           <p className="text-destructive">
-            This shortcut is already used by &ldquo;{conflict}&rdquo;.
-            Overwrite?
+            This shortcut is already used by &ldquo;{conflict}&rdquo;. Overwrite?
           </p>
           <div className="flex gap-2">
             <Button

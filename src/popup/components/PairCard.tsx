@@ -1,16 +1,12 @@
 import { useSortable } from "@dnd-kit/react/sortable";
-import type { StoredPair } from "@/shared/types";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { GripVertical, Keyboard, Pencil, Play, Trash2 } from "lucide-react";
-import { DeleteDialog } from "./DeleteDialog";
 import { useState } from "react";
+import type { StoredPair } from "@/shared/types";
+import { DeleteDialog } from "./DeleteDialog";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 interface PairCardProps {
   pair: StoredPair;
@@ -21,14 +17,7 @@ interface PairCardProps {
   onDelete: () => void;
 }
 
-export function PairCard({
-  pair,
-  index,
-  currentValue,
-  onToggle,
-  onEdit,
-  onDelete,
-}: PairCardProps) {
+export function PairCard({ pair, index, currentValue, onToggle, onEdit, onDelete }: PairCardProps) {
   const [showDelete, setShowDelete] = useState(false);
   const { ref, handleRef } = useSortable({ id: pair.id, index });
 
@@ -37,6 +26,7 @@ export function PairCard({
       <Card ref={ref} className="p-3 rounded-md animate-fade-in">
         <div className="flex items-center gap-2">
           <button
+            type="button"
             ref={handleRef}
             className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground transition-colors touch-none"
             aria-label="Drag to reorder"
@@ -70,15 +60,9 @@ export function PairCard({
 
             <div className="flex items-center gap-1 mt-1 text-xs text-muted-foreground min-w-0 truncate">
               {pair.values.map((v, i) => (
-                <span key={i} className="flex items-center gap-1">
+                <span key={`${pair.id}-${v}`} className="flex items-center gap-1">
                   {i > 0 && <span className="text-border">&middot;</span>}
-                  <span
-                    className={
-                      v === currentValue ? "text-primary font-medium" : ""
-                    }
-                  >
-                    {v}
-                  </span>
+                  <span className={v === currentValue ? "text-primary font-medium" : ""}>{v}</span>
                 </span>
               ))}
             </div>

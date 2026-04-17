@@ -1,5 +1,5 @@
-import { DragDropProvider } from "@dnd-kit/react";
 import { move } from "@dnd-kit/helpers";
+import { DragDropProvider } from "@dnd-kit/react";
 import { useState } from "react";
 import type { StoredPair } from "@/shared/types";
 import { PairCard } from "./PairCard";
@@ -67,7 +67,7 @@ export function PairList({
               onEdit={() => onEdit(pair.id)}
               onDelete={() => onDelete(pair.id)}
             />
-          )
+          ),
         )}
       </div>
     </DragDropProvider>

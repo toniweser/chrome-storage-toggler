@@ -1,15 +1,13 @@
+import { Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { StoredPair } from "@/shared/types";
-import { PairList } from "./components/PairList";
 import { PairForm } from "./components/PairForm";
+import { PairList } from "./components/PairList";
 import { Button } from "./components/ui/button";
-import { Plus } from "lucide-react";
 
 export function App() {
   const [pairs, setPairs] = useState<StoredPair[]>([]);
-  const [currentValues, setCurrentValues] = useState<
-    Record<string, string | null>
-  >({});
+  const [currentValues, setCurrentValues] = useState<Record<string, string | null>>({});
   const [editingPairId, setEditingPairId] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -50,8 +48,7 @@ export function App() {
   const handleToggle = async (pair: StoredPair) => {
     const current = currentValues[pair.key];
     const index = pair.values.indexOf(current ?? "");
-    const nextIndex =
-      index === -1 || index === pair.values.length - 1 ? 0 : index + 1;
+    const nextIndex = index === -1 || index === pair.values.length - 1 ? 0 : index + 1;
     const newValue = pair.values[nextIndex];
 
     setCurrentValues((prev) => ({ ...prev, [pair.key]: newValue }));
@@ -80,9 +77,7 @@ export function App() {
   };
 
   const handleDeletePair = async (id: string) => {
-    const updatedPairs = pairs
-      .filter((p) => p.id !== id)
-      .map((p, i) => ({ ...p, order: i }));
+    const updatedPairs = pairs.filter((p) => p.id !== id).map((p, i) => ({ ...p, order: i }));
     await savePairs(updatedPairs);
   };
 
@@ -105,12 +100,7 @@ export function App() {
         <img src="./icons/icon48.png" alt="Storage Toggler" className="h-5 w-5" />
         <h1 className="text-base font-semibold">Storage Toggler</h1>
         {!isAdding && editingPairId === null && (
-          <Button
-            variant="outline"
-            size="sm"
-            className="ml-auto"
-            onClick={() => setIsAdding(true)}
-          >
+          <Button variant="outline" size="sm" className="ml-auto" onClick={() => setIsAdding(true)}>
             <Plus className="h-4 w-4 mr-1" />
             Add new pair
           </Button>
@@ -138,11 +128,7 @@ export function App() {
         )}
 
         {isAdding && (
-          <PairForm
-            allPairs={pairs}
-            onSave={handleSavePair}
-            onCancel={() => setIsAdding(false)}
-          />
+          <PairForm allPairs={pairs} onSave={handleSavePair} onCancel={() => setIsAdding(false)} />
         )}
       </div>
     </div>

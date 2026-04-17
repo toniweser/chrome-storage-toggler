@@ -1,3 +1,4 @@
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
-import { Button } from "./ui/button";
 
 interface DeleteDialogProps {
   open: boolean;
@@ -15,12 +15,7 @@ interface DeleteDialogProps {
   onCancel: () => void;
 }
 
-export function DeleteDialog({
-  open,
-  pairKey,
-  onConfirm,
-  onCancel,
-}: DeleteDialogProps) {
+export function DeleteDialog({ open, pairKey, onConfirm, onCancel }: DeleteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
       <DialogContent className="animate-scale-in sm:max-w-[400px]">

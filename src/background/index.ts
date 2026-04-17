@@ -1,7 +1,11 @@
 import type { Message, StoredPair } from "@/shared/types";
 
 chrome.runtime.onMessage.addListener(
-  (message: Message, _sender: chrome.runtime.MessageSender, sendResponse: (response?: unknown) => void) => {
+  (
+    message: Message,
+    _sender: chrome.runtime.MessageSender,
+    sendResponse: (response?: unknown) => void,
+  ) => {
     if (!message?.type) return false;
 
     handleMessage(message)
@@ -12,7 +16,7 @@ chrome.runtime.onMessage.addListener(
       });
 
     return true;
-  }
+  },
 );
 
 async function handleMessage(message: Message): Promise<unknown> {
@@ -56,7 +60,7 @@ function emptyValues(keys: string[]): Record<string, string | null> {
 }
 
 async function getCurrentValues(
-  keys: string[]
+  keys: string[],
 ): Promise<{ values: Record<string, string | null> }> {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.id || !isScriptableUrl(tab.url)) return { values: emptyValues(keys) };
@@ -83,7 +87,7 @@ async function getCurrentValues(
 async function toggleValue(
   key: string,
   newValue: string,
-  reload: boolean
+  reload: boolean,
 ): Promise<{ success: boolean; error?: string }> {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.id || !isScriptableUrl(tab.url)) {

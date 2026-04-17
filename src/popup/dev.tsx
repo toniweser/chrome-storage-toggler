@@ -1,4 +1,4 @@
-import type { StoredPair, Message } from "@/shared/types";
+import type { Message, StoredPair } from "@/shared/types";
 
 // --- Mock Chrome APIs ---
 
@@ -42,9 +42,8 @@ interface StorageChange {
   newValue?: unknown;
 }
 
-const changeListeners: Array<
-  (changes: Record<string, StorageChange>, areaName: string) => void
-> = [];
+const changeListeners: Array<(changes: Record<string, StorageChange>, areaName: string) => void> =
+  [];
 
 const chromeMock = {
   runtime: {
@@ -80,7 +79,7 @@ const chromeMock = {
                   newValue: message.pairs,
                 },
               },
-              "sync"
+              "sync",
             );
           }
           return { success: true };
@@ -96,12 +95,7 @@ const chromeMock = {
       },
     },
     onChanged: {
-      addListener: (
-        fn: (
-          changes: Record<string, StorageChange>,
-          areaName: string
-        ) => void
-      ) => {
+      addListener: (fn: (changes: Record<string, StorageChange>, areaName: string) => void) => {
         changeListeners.push(fn);
       },
     },
@@ -130,5 +124,5 @@ createRoot(document.getElementById("root")!).render(
     <TooltipProvider>
       <App />
     </TooltipProvider>
-  </StrictMode>
+  </StrictMode>,
 );
