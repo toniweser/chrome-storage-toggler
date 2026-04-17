@@ -7,10 +7,10 @@
   [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 </div>
 
----
+
 
 <div align="center">
-  <img src="doc/screenshot.png" alt="Screenshot" width="500" />
+  <img src="media/screenshot.png" alt="Screenshot" width="500" />
 </div>
 
 ---
