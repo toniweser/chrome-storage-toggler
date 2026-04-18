@@ -3,11 +3,10 @@
   <h1>Storage Toggler</h1>
   <p>A Chrome extension to toggle localStorage values on any website with one click or keyboard shortcut.</p>
 
+  [![Release](https://img.shields.io/github/v/release/toniweser/chrome-storage-toggler?style=flat-square)](https://github.com/toniweser/chrome-storage-toggler/releases/latest)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
   [![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 </div>
-
-
 
 <div align="center">
   <img src="media/screenshot.png" alt="Screenshot" width="500" />
@@ -36,9 +35,8 @@ Configure localStorage key-value pairs and cycle through their values instantly 
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | TypeScript, React 19, Tailwind CSS v4, Lucide icons |
+| **Frontend** | TypeScript, React 19, Tailwind CSS v4, shadcn/ui, Lucide icons, @dnd-kit/react |
 | **Extension** | Chrome Manifest V3, Service Worker, Scripting API |
-| **DnD** | @dnd-kit/react |
 | **Build** | Vite |
 
 ## Getting Started
